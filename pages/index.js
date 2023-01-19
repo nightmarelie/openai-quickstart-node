@@ -19,17 +19,22 @@ export default function Home() {
 
       const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw (
+          data.error ||
+          new Error(`Request failed with status ${response.status}`)
+        );
       }
 
       setResult(data.result);
       setAnimalInput("");
-    } catch(error) {
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
   }
+
+  const handleChange = (e) => setAnimalInput(e.target.value);
 
   return (
     <div>
@@ -47,7 +52,7 @@ export default function Home() {
             name="animal"
             placeholder="Enter an animal"
             value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            onChange={handleChange}
           />
           <input type="submit" value="Generate names" />
         </form>
